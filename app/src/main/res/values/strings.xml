@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">U3</string>
+
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="enter_your_name">Enter your name here:</string>
+
+    <string name="alert_dialog">Show alert dialog</string>
+    <string name="date_picker_dialog">Show date picker dialog</string>
+
+    <string-array name="network_options">
+        <item>WiFi</item>
+        <item>3G</item>
+        <item>4G</item>
+        <item>5G</item>
+        <item>Ethernet</item>
+    </string-array>
+</resources>
