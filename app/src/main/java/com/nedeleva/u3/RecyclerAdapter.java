@@ -1,12 +1,6 @@
 package com.nedeleva.u3;
 
-import android.content.ContentUris;
-import android.content.Context;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -81,12 +74,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
 
         holder.name.setText(items.get(position).getName());
-        holder.number.setText( items.get(position).getNumber());
+        holder.number.setText(items.get(position).getNumber());
 
         holder.callButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                callListener.callNumber("123");
                 callListener.callNumber(items.get(position).getNumber());
+                Log.d("click",items.get(position).getNumber());
             }
         });
     }
