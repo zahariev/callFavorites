@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
@@ -29,9 +30,6 @@ import java.util.Random;
 public class RecyclerActivity extends AppCompatActivity implements OnCallClick {
 
     private RecyclerView recyclerView;
-    private int REQUEST_CALL_LOG = 1001;
-    private int REQUEST_CALL_PHONE = 1002;
-    private int REQUEST_READ_CONTACTS = 1003;
 
     private List<CallEntry> callEntries;
     private Map<CallEntry, Integer> numberOfCalls;
@@ -95,22 +93,6 @@ public class RecyclerActivity extends AppCompatActivity implements OnCallClick {
         recyclerView.setAdapter(adapter);
     }
 
-//    private void populateStats() {
-//        final StringBuilder builder = new StringBuilder();
-//        for (CallEntry e : numberOfCalls.keySet()) {
-//            builder.append(e.getName());
-//            builder.append("\n");
-//            builder.append(e.getNumber());
-//            builder.append("\n");
-//            builder.append("called: ");
-//            builder.append(numberOfCalls.get(e));
-//            builder.append("\n");
-//            builder.append("----------------");
-//            builder.append("\n");
-//        }
-//        callStats.setText(builder.toString());
-//    }
-
     private void getCallsInfo(Cursor cursor) {
         while (cursor.moveToNext()) {
             CallEntry entry = new CallEntry();
@@ -124,13 +106,16 @@ public class RecyclerActivity extends AppCompatActivity implements OnCallClick {
             final String uri =
                     (cursor.getString(cursor.getColumnIndex(CallLog.Calls.CACHED_PHOTO_URI)));
 
-
             if(uri!=null) {
+                Log.d("sdf",uri);
                 entry.setImageUri(Uri.parse(uri));
             }
-            else if(canReadContacts){
-
-                entry.setImageUri(getPhotoUri(getContactIDFromNumber(number)));
+            else
+//                if(canReadContacts)
+            {
+//                Log.d("null",uri);
+                Log.d("number",number);
+                entry.setImageUri(getPhotoUri(number));
             }
 
             entry.setNumber(number);
@@ -153,14 +138,14 @@ public class RecyclerActivity extends AppCompatActivity implements OnCallClick {
 //        populateEntries();
     }
 
-        public Uri getPhotoUri(int id) {
-           String ID = String.valueOf(id);
-
+        public Uri getPhotoUri(String number) {
+           String ID = String.valueOf(getContactIDFromNumber(number));
+        Log.d("id",ID);
         try {
             Cursor cur = getContentResolver().query(
-                    ContactsContract.Contacts.CONTENT_URI,
+                    ContactsContract.Data.CONTENT_URI,
                     null,
-                    ContactsContract.CommonDataKinds.Phone.NUMBER + "=" + ID + " AND "
+                    ContactsContract.Data.CONTACT_ID+ "=" + ID + " AND "
                             + ContactsContract.Data.MIMETYPE + "='"
                             + ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE + "'", null,
                     null);
@@ -222,7 +207,8 @@ public class RecyclerActivity extends AppCompatActivity implements OnCallClick {
 
     @Override
     public void callNumber(String number) {
-        if (canCallPhone) {
+//        if (canCallPhone)
+        {
             Intent call = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
             startActivity(call);
         }
