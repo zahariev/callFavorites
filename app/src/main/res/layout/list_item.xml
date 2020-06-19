@@ -41,7 +41,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_margin="4dp"
-        android:background="#f3f3f3"
+        android:background="#ffffff"
         android:src="@drawable/ic_call_black_24dp" />
 
 </RelativeLayout>
