@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">call Favorites</string>
+
+    <string name="menu_refresh">refresh</string>
+    <string name="option_2">Option 2</string>
+    <string name="enter_your_name">Enter your name here:</string>
+
+
+</resources>
