@@ -1,4 +1,4 @@
-package com.nedeleva.u3;
+package com.bzahariev.callFavorites;
 
 public interface OnCallClick {
 

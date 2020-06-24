@@ -1,4 +1,4 @@
-package com.nedeleva.u3;
+package com.bzahariev.callFavorites;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -66,7 +66,7 @@ public class RecyclerActivity extends AppCompatActivity implements OnCallClick {
             getCallsInfo(callLog);
 
             Toast.makeText(this,
-                    String.valueOf(callEntries.size()), Toast.LENGTH_SHORT).show();
+                    String.valueOf(numberOfCalls.size())+ " contacts ", Toast.LENGTH_SHORT).show();
 
             populateRecyclerView();
 
@@ -119,8 +119,6 @@ public class RecyclerActivity extends AppCompatActivity implements OnCallClick {
             }
 
             entry.setNumber(number);
-
-
 
             if (name == null) {
                 entry.setName("Unknown");

@@ -1,4 +1,4 @@
-package com.nedeleva.u3;
+package com.bzahariev.callFavorites;
 
 import android.util.Log;
 import android.view.LayoutInflater;

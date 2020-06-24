@@ -1,4 +1,4 @@
-package com.nedeleva.u3;
+package com.bzahariev.callFavorites;
 
 import android.net.Uri;
 
@@ -42,12 +42,17 @@ public class CallEntry {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CallEntry callEntry = (CallEntry) o;
-        return Objects.equals(name, callEntry.name) &&
-                Objects.equals(number, callEntry.number);
+        /*
+         * incoming and outgoing calls sometimes have different numbers (with or without ext +359 or 00359)
+         * searching with (name && number) get duplicate entry for some records.
+         * We don't want that :)
+         */
+
+        return Objects.equals(name, callEntry.name) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, number);
+        return Objects.hash(name);
     }
 }
