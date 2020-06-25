@@ -83,15 +83,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         holder.letter.setText(String.valueOf(items.get(position).getName().charAt(0)));
 //        holder.letter.setTextColor(Color.parseColor(colors.get(1)));
-        holder.letter.setBackgroundColor(Color.parseColor(colors.get(rand.nextInt(colors.size()-1))));
+        holder.letter.setBackgroundColor(Color.parseColor(colors.get(rand.nextInt(colors.size()))));
 
         if(items.get(position).getImageUri()!=null){
             holder.letter.setVisibility(View.GONE);
             holder.image.setImageURI( items.get(position).getImageUri());
         }
 
-        holder.name.setText(items.get(position).getName());
-        holder.number.setText(items.get(position).getNumber());
+        if(items.get(position).getName()=="Unknown")
+        {
+            holder.name.setText(items.get(position).getNumber());
+            holder.number.setText(items.get(position).getName());
+        }
+        else {
+            holder.name.setText(items.get(position).getName());
+            holder.number.setText(items.get(position).getNumber());
+        }
 
         holder.callButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +108,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 Log.d("click",items.get(position).getNumber());
             }
         });
+
+        holder.name.setOnTouchListener(new OnSwipeTouchListener(holder.name.getContext()) {
+            @Override
+            public void onSwipeRight() {
+                callListener.callNumber(items.get(position).getNumber());
+            }
+        });
     }
+
 
 
 
