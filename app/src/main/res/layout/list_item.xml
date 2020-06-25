@@ -10,6 +10,16 @@
 <!--    android:background="@color/colorPrimary"-->
 <!--    >-->
 
+    <TextView
+        android:id="@+id/letter"
+        android:textColor="#FFFFFF"
+        android:textSize="35dp"
+        android:text="A"
+        android:textAlignment="center"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/letter_circle"/>
 
     <ImageView
         android:id="@+id/image"
@@ -20,7 +30,6 @@
         android:layout_margin="4dp"
          />
 
-
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -30,6 +39,7 @@
         android:layout_toRightOf="@+id/image"
         android:textSize="18sp"
         android:textColor="@color/colorFontDark"/>
+
     <TextView
         android:id="@+id/number"
         android:layout_width="wrap_content"
