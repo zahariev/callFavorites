@@ -1,5 +1,6 @@
 package com.bzahariev.callFavorites;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -19,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -27,6 +30,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private List<CallEntry> items;
     private OnCallClick callListener;
 
+    private List<String> colors = Arrays.asList("#d32f2f",
+            "#C2185B", "#7B1FA2", "#512DA8",
+            "#303F9F", "#1976D2", "#0288D1", "#0097A7",
+            "#00796B", "#388E3C", "#689F38", "#AFB42B",
+            "#FBC02D", "#FFA000", "#F57C00", "#E64A19",
+            "#5D4037", "#616161", "#455A64" );
 
 
 
@@ -69,7 +78,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+
+        Random rand = new Random();
+
+        holder.letter.setText(String.valueOf(items.get(position).getName().charAt(0)));
+//        holder.letter.setTextColor(Color.parseColor(colors.get(1)));
+        holder.letter.setBackgroundColor(Color.parseColor(colors.get(rand.nextInt(colors.size()-1))));
+
         if(items.get(position).getImageUri()!=null){
+            holder.letter.setVisibility(View.GONE);
             holder.image.setImageURI( items.get(position).getImageUri());
         }
 
@@ -101,6 +118,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         ImageView image;
         TextView name;
+        TextView letter;
         TextView number;
         ImageButton callButton;
 
@@ -109,6 +127,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
             image = itemView.findViewById(R.id.image);
             name = itemView.findViewById(R.id.name);
+            letter = itemView.findViewById(R.id.letter);
             number = itemView.findViewById(R.id.number);
 
             callButton = itemView.findViewById(R.id.callButton);
